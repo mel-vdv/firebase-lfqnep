@@ -1,0 +1,38 @@
+import { Injectable } from '@angular/core';
+import{ AngularFirestore} from '@angular/fire/compat/firestore';
+import { Observable } from 'rxjs';
+import { Film } from '../models/film';
+import firebase from 'firebase/compat';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class CrudservService {
+collek='films';
+  constructor(
+    private afs : AngularFirestore
+  ) { }
+
+  creerFilm(newFilm:Film){
+   return this.afs.collection(this.collek).add(newFilm);
+  }
+ 
+  //-------------
+  afficherDetail(id:any){
+    return this.afs.doc(`${this.collek}/${id}`).valueChanges() as Observable<Film>;
+  }
+  //----------------
+  getFilmsNoPubl(){
+    return this.afs.collection('films', (ref)=>ref.where('published','==',false)).valueChanges({idField:'id'}) as Observable<Film[]>;
+  }
+  getFilmsPubl(){
+    return this.afs.collection('films', (ref)=>ref.where('published','==',true)).valueChanges({idField:'id'}) as Observable<Film[]>;
+  }
+  //----------------/
+  publier(id:any){
+    return this.afs.collection(this.collek).doc(id).update({
+      published: true
+    }); 
+  }
+
+}

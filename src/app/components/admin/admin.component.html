@@ -1,0 +1,10 @@
+<h2>admin</h2>
+
+<div *ngIf="attentes$">
+    <ul *ngFor="let attente of attentes$">
+        <li>{{attente.titre}} 
+            <button>modifier</button> 
+            <button (click)="publish(attente.id)">publier</button>
+        </li>
+    </ul>
+</div>

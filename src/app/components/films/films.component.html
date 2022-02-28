@@ -1,0 +1,10 @@
+<div *ngIf="!films$">
+    ...loading
+</div>
+
+<div *ngIf="films$">
+    <ul *ngFor="let affiche of films$">
+        <li>
+           <a [routerLink]="'/detail/'+affiche.id"> {{affiche.titre}}</a></li>
+    </ul>
+</div>
