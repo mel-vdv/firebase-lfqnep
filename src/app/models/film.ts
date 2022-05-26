@@ -1,6 +1,6 @@
 export interface Film {
     id?:string;
-   // dateCreation:any;
+    dateCreation:any;
     auteur:string;
     email:string;
     titre:string;
@@ -9,11 +9,13 @@ export interface Film {
     pitch:string;
     note:string;
     casting:string;
-    nbStarsPublic:number;
-    nbVotesPublic: number;
-    nbStarsAdmin:number;
-    nbVotesAdlin:number;
-    affiche?:Buffer;
-    published: boolean;
+    nbStarsPublic?:number;
+    nbVotesPublic?: number;
+    nbStarsAdmin?:number;
+    nbVotesAdmin?:number;
+    //affiche?:Buffer;
+    published?: boolean;
+    score: number;
+    classe:string;
 
 }

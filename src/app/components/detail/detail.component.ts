@@ -10,27 +10,43 @@ import { Film } from 'src/app/models/film';
   styleUrls: ['./detail.component.css']
 })
 export class DetailComponent implements OnInit, OnDestroy {
-  detail!:Film;
+  detail!: Film;
   filmId = '';
-  sub: Subscription;
+  sub!: Subscription;
+  vote = 0;
   constructor(
     private crud: CrudservService,
     private activatedRoute: ActivatedRoute
   ) {
-    this.sub = this.activatedRoute.paramMap.subscribe((params: any) => {
-      this.filmId = params.get('id');
-    })
+
 
   }
 
   ngOnInit(): void {
+    this.sub = this.activatedRoute.paramMap.subscribe((params: any) => {
+      this.filmId = params.get('id');
 
-    this.crud.afficherDetail(this.filmId).subscribe(data=>{
-this.detail=data;
+      this.crud.afficherDetail(this.filmId).subscribe(data => {
+        this.detail = data;
+      });
     });
+
+
   }
+  /////////////////////////////////////////////////
+  voter(etoiles: number) {
+    
+    this.vote = etoiles;
+  }
+  voteDone=false;
+  sendVote(){
+    this.voteDone=true;
+    this.crud.voter(this.filmId, this.vote);
+  }
+
+  /////////////////////////////////////////////////
   ngOnDestroy(): void {
-      this.sub.unsubscribe();
+    this.sub.unsubscribe();
   }
 
 }

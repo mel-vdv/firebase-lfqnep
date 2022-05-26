@@ -5,7 +5,7 @@ import { AngularFireModule} from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 //form:
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 //material:
 
@@ -40,6 +40,8 @@ import { AdminComponent } from './components/admin/admin.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+
+    FormsModule,
 
     AngularFireModule.initializeApp(environment.firebase),AngularFireAuthModule,  AngularFireStorageModule,
 

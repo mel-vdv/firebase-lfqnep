@@ -1,0 +1,55 @@
+.error{
+    font-weight: bold;
+    color:red;
+}
+.nav{
+    height: 10vh;
+    background-color:rgb(54,51,51);
+}
+.principal{
+    height: 90vh;
+}
+.fond{
+    height: 100%;
+    width: 100%;
+    z-index: 5;
+}
+.machine{
+    position: absolute;
+    top: 10vh;
+    left: 20vw;
+    z-index: 4;
+    height: 90%;
+    max-width: 60%;
+}
+.journal{
+    position: absolute;
+    top: 40vh;
+    left: 60vw;
+    z-index: 4;
+    height: 50%;
+    max-width: 60%;
+}
+.texte{
+    position: absolute;
+    top: 11.5vh;
+    left: 28.5vw;
+    z-index: 6;
+    height: 50%;
+    max-width: 300px;
+}
+.body{
+    border: 10px solid rgb(76,43,34);
+}
+.rubriques{
+    display: flex;
+}
+.rubriques div{
+    border: solid 2px rgb(76,43,34);
+    
+    font-size: small;
+}
+.rubriques div:hover{
+    border-bottom: hidden;
+   
+}

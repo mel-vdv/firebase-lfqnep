@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import{ AngularFirestore} from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { Film } from '../models/film';
-import firebase from 'firebase/compat';
+import firebase from 'firebase/compat/app'; // important sous cette forme
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ collek='films';
  
   //-------------
   afficherDetail(id:any){
-    return this.afs.doc(`${this.collek}/${id}`).valueChanges() as Observable<Film>;
+    return this.afs.doc(`${this.collek}/${id}`).valueChanges({idField:'id'}) as Observable<Film>;
   }
   //----------------
   getFilmsNoPubl(){
@@ -34,5 +34,14 @@ collek='films';
       published: true
     }); 
   }
+  //--------------------------
+  voter(id:any, etoiles:number){
+  const increment = firebase.firestore.FieldValue.increment(1);
+  const somme =  firebase.firestore.FieldValue.increment(etoiles);
 
+  return this.afs.collection(this.collek).doc(id).update({
+    nbVotesPublic: increment,
+    nbStarsPublic: somme
+  }); 
+}
 }
