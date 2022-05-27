@@ -21,7 +21,6 @@ export class ProposerComponent implements OnInit {
     casting: '',
     published: false,
     nbVotesPublic: 0,
-    nbVotesAdmin: 0,
     nbStarsPublic: 0,
     nbStarsAdmin: 0,
     score:0,

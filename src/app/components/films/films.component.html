@@ -39,7 +39,11 @@
                 <div> <input type="radio" id="peplum" value="peplum" name="choixGenre" (change)="choisirGenre('peplum')">Péplum</div>
                 <div> <input type="radio" id="sf" value="sf" name="choixGenre" (change)="choisirGenre('sf')">Science-Fiction</div>
             </div>
-            <div *ngIf="critere==='motcle'">mot cle</div>
+            <div *ngIf="critere==='motcle'">
+                <span> Entrer un Mot clé : </span>
+                <input type="text" id="motcle" name="motcle" [(ngModel)]="motcle" >
+                <button (click)="rechMotcle()">rechercher</button>
+            </div>
         </div>
     </div>
     <div class="affichage">

@@ -12,7 +12,6 @@ export interface Film {
     nbStarsPublic?:number;
     nbVotesPublic?: number;
     nbStarsAdmin?:number;
-    nbVotesAdmin?:number;
     //affiche?:Buffer;
     published?: boolean;
     score: number;
