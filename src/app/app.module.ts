@@ -24,6 +24,7 @@ import { OscarsComponent } from './components/oscars/oscars.component';
 import { FilmsComponent } from './components/films/films.component';
 import { DetailComponent } from './components/detail/detail.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { EditerComponent } from './components/editer/editer.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { AdminComponent } from './components/admin/admin.component';
     OscarsComponent,
     FilmsComponent,
     DetailComponent,
-    AdminComponent
+    AdminComponent,
+    EditerComponent
   ],
   imports: [
     BrowserModule,

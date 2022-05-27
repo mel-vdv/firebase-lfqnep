@@ -29,10 +29,12 @@ mon idée:
     <div *ngIf="!fini">
     <div class="rubriques">
         <div (click)="select(0)">Film</div>
-        <div (click)='select(1)'>Résumé</div>
-        <div (click)="select(2)">Casting</div>
-        <div (click)="select(3)">Note</div>
-        <div (click)="select(5)">Envoi</div>
+        <div (click)="select(1)">Genre</div>
+        <div (click)='select(2)'>Résumé</div>
+        <div (click)="select(3)">Casting</div>
+        <div (click)="select(4)">Note</div>
+        <div (click)="select(5)">Bonus</div>
+        <div (click)="select(6)">Envoi</div>
     </div>
         <div *ngIf="selection===0"> <form>
             <div>
@@ -71,8 +73,28 @@ mon idée:
     
         </div>
 
+        <div  *ngIf="selection===1">
+            <div>
+                Genre : 
+                <input type="checkbox" name="genre" id="fantastique" value="fantastique" #fantastique (change)="quoi(fantastique.checked, 'fantastique')">Fantastique
+                <input type="checkbox" name="genre" id="comedie" value="comedie" #comedie  (change)="quoi(comedie.checked, 'comedie')">Comédie
+                <input type="checkbox" name="genre" id="drame" value="drame" #drame  (change)="quoi(drame.checked,'drame')">Drame
+                <input type="checkbox" name="genre" id="romance" value="romance"#romance  (change)="quoi(romance.checked,'romance')">Romance
+                <input type="checkbox" name="genre" id="thriller" value="thriller"#thriller (change)="quoi(thriller.checked,'thriller')">Thriller
+                <input type="checkbox" name="genre" id="policier" value="policier"#policier (change)="quoi(policier.checked,'policier')">Policier
+                <input type="checkbox" name="genre" id="sf" value="sf" #sf  (change)="quoi(sf.checked,'sf')">Science-Fiction
+                <input type="checkbox" name="genre" id="dystopie" value="dystopie"#dystopie  (change)="quoi(dystopie.checked,'dystopie')">Dystopie
+                <input type="checkbox" name="genre" id="peplum" value="peplum" #peplum  (change)="quoi(peplum.checked,'peplum')">Péplum
+                <input type="checkbox" name="genre" id="historique" value="historique"#historique  (change)="quoi(historique.checked,'historique')">Historique
+                <input type="checkbox" name="genre" id="biographie" value="biographie"#biographie (change)="quoi(biographie.checked,'biographie')">biographie
+                <input type="checkbox" name="genre" id="action" value="action"#action  (change)="quoi(action.checked,'action')">Action
+                <input type="checkbox" name="genre" id="horreur" value="horreur"#horreur  (change)="quoi(horreur.checked,'horreur')">horreur
+                <input type="checkbox" name="genre" id="western" value="western"#western (change)="quoi(western.checked,'western')">Western
+            </div>
+        </div>
+
     
-        <div *ngIf="selection===1"><form>
+        <div *ngIf="selection===2"><form>
             <div>
                 Pitch:
                 
@@ -89,14 +111,8 @@ mon idée:
             </div>
         </form></div>
     
-        <div *ngIf="selection===2"><form>
-            <div>
-                Genre : 
-                <input type="checkbox" name="genre" id="fantastique" value="fantastique" #fantastique (change)="quoi(fantastique.checked, 'fantastique')">Fantastique
-                <input type="checkbox" name="genre" id="comedie" value="comedie" #comedie  (change)="quoi(comedie.checked, 'comedie')">Comédie
-                <input type="checkbox" name="genre" id="drame" value="drame" #drame  (change)="quoi(drame.checked,'drame')">Drame
-                <input type="checkbox" name="genre" id="romance" value="romance"#romance  (change)="quoi(romance.checked,'romance')">Romance
-            </div>
+        <div *ngIf="selection===3"><form>
+           
             <div>
                 Casting:
                 <input type="text" name="casting" [(ngModel)]="film.casting" required #saisieCasting="ngModel">
@@ -111,7 +127,7 @@ mon idée:
             </div>
         </form></div>
     
-        <div *ngIf="selection===3"><form>
+        <div *ngIf="selection===4"><form>
             <div>
                 Note d'intention:
                 <input type="text" name="note" [(ngModel)]="film.note" #saisieNote = "ngModel">
@@ -126,7 +142,7 @@ mon idée:
             </div>
         </form></div>
     
-        <div *ngIf="selection===4"><form>
+        <div *ngIf="selection===5"><form>
             BONUS
             <img height="40px" (click)='aider(6)' src="./../../../assets/question.png" alt="question">
             <div *ngIf="aide===6">
@@ -135,7 +151,7 @@ mon idée:
             </div>
         </form></div>
     
-        <div *ngIf="selection===5"><form>
+        <div *ngIf="selection===6"><form>
             <div>
                 Pseudo:
                 <input type="text" name="pseudo" [(ngModel)]="film.auteur" required>
@@ -144,11 +160,18 @@ mon idée:
                 Email:
                 <input type="text" name="email" [(ngModel)]="film.email" required>
             </div>
-            <input type="radio"> J'accepte que, s'il est retenu, mon projet soit eventuellement corrigé, ensuite illustré et
-            publié sur le site lfqnep ainsi que sur les pages fb et instagram dédiées.
-            <input type="radio"> cgu
-            <button (click)="proposer()">POSTER</button>
-    
+            <input type="checkbox" value="rgpd" name="accord" #rgpd id="rgpd" [checked]="rgpd.checked" > J'accepte que, s'il est retenu, mon projet soit eventuellement corrigé, ensuite illustré et
+            publié sur le site lfqnep ainsi que sur les pages fb et instagram dédiées. <br>
+            <input type="checkbox" value="cgu" name="accord" id="cgu" #cgu [checked]="cgu.checked" ><br>
+         
+            <button (click)="proposer()" [disabled]="!cgu.checked || !rgpd.checked">POSTER</button>
+
         </form></div>
-    </div></div>
+
+        <div *ngIf="selection===7">
+            <div>Merci {{film.auteur}} d'avoir participé à ce projet collaboratif.</div>
+            <div>Un email de confirmation vous a été envoyé à {{film.email}}</div>
+        </div>
     </div>
+</div>
+  

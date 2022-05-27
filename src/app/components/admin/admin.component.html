@@ -1,10 +1,18 @@
-<h2>admin</h2>
-
-<div *ngIf="attentes$">
-    <ul *ngFor="let attente of attentes$">
-        <li>{{attente.titre}} 
-            <button>modifier</button> 
-            <button (click)="publish(attente.id)">publier</button>
-        </li>
-    </ul>
+<div class="container">
+    <div class="gauche">
+        <h2>Projets en attente : </h2>
+        <div *ngIf="attentes$">
+            <div *ngFor="let attente of attentes$">
+                <button (click)="nav(attente.id!)">{{attente.titre}} </button>
+            </div>
+        </div>
+    </div>
+    <div class="droite">
+        <h2>Films à l'affiche :</h2>
+        <div *ngIf="films$">
+            <div *ngFor="let film of films$">
+                <button (click)="nav(film.id!)">{{film.titre}} </button>
+            </div>
+        </div>
+    </div>
 </div>

@@ -34,6 +34,14 @@ collek='films';
       published: true
     }); 
   }
+  //----------------
+  editer(id:any, modif:any){
+    return this.afs.collection(this.collek).doc(id).update(modif); 
+  }
+  //-----------------
+  supprimer(id:any){
+    return this.afs.collection(this.collek).doc(id).delete();
+  }
   //--------------------------
   voter(id:any, etoiles:number){
   const increment = firebase.firestore.FieldValue.increment(1);

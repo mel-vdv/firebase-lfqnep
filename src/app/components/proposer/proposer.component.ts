@@ -2,7 +2,6 @@ import { CrudservService } from './../../services/crudserv.service';
 import { Component, OnInit } from '@angular/core';
 //import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Film } from 'src/app/models/film';
-import { format } from 'path';
 
 @Component({
   selector: 'app-proposer',
@@ -39,9 +38,7 @@ export class ProposerComponent implements OnInit {
   }
   /////////////////////////////////////////////////////////////////
   proposer() {
-    console.log('on poste');
-  
-    this.crud.creerFilm(this.film);
+   this.crud.creerFilm(this.film);
 
     /* let envoiAdmin = {
        to: 'melvdv@yahoo.fr',// sera remplacé par lamine.comics
@@ -60,6 +57,7 @@ export class ProposerComponent implements OnInit {
   //     this.crud.mail(envoiPart).subscribe(()=>{
      //    console.log('mail envoyé');
      //  });/*/
+     this.selection=7;
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -92,6 +90,7 @@ export class ProposerComponent implements OnInit {
   //---------------
 quoi(coche:boolean, genre:string){
   if(coche){
+
  this.film.genre.push(genre);
   }
   else{
