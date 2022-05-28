@@ -52,4 +52,10 @@ collek='films';
     nbStarsPublic: somme
   }); 
 }
+//-------------------------
+changerPhoto(id:any, url:any){
+  return this.afs.collection('films').doc(id).update({
+    url:[firebase.firestore.FieldValue.arrayUnion(url)]
+  });
+}
 }

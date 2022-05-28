@@ -5,7 +5,7 @@
     <div class="etsi">...{{detail.accroche}}...</div>
     <div class="centre">
         <div class="gauche">
-            <div><img src="./../../../assets/affiches/{{detail.id}}.png" alt="affiche"></div>
+            <div><img [src]="detail.url" alt="affiche"></div>
         </div>
         <div class="droite">
             <div><span *ngIf="detail.genre.length<2">Genre:</span> <span *ngIf="detail.genre.length>1">Genres :</span> {{detail.genre}}</div>

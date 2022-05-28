@@ -1,7 +1,8 @@
 import { CrudservService } from './../../services/crudserv.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Component,  OnInit } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { finalize } from 'rxjs';
 @Component({
   selector: 'app-editer',
   templateUrl: './editer.component.html',
@@ -12,7 +13,8 @@ export class EditerComponent implements OnInit {
   constructor(
     private router: Router,
     private ar: ActivatedRoute,
-    private crud: CrudservService
+    private crud: CrudservService,
+    private afStorage: AngularFireStorage,
   ) { }
   //////////////////////////////////////
   filmId!: string;
@@ -36,16 +38,16 @@ export class EditerComponent implements OnInit {
   editer1() {
     this.crayonVis = true;
   }
-  modifTitre = false;modifAccroche = false;modifPitch = false;modifGenre = false;modifCasting = false;modifNote = false;modifAffiche = false;
+  modifTitre = false; modifAccroche = false; modifPitch = false; modifGenre = false; modifCasting = false; modifNote = false; modifAffiche = false;
   editer2(rubrique: string) {
     switch (rubrique) {
       case 'titre': this.modifTitre = true; break;
-      case 'accroche': this.modifAccroche = true;  break;
-      case 'pitch': this.modifPitch = true;  break;
-      case 'genre': this.modifGenre= true; this.detail.genre=[]; break;
-      case 'casting': this.modifCasting= true;break;
+      case 'accroche': this.modifAccroche = true; break;
+      case 'pitch': this.modifPitch = true; break;
+      case 'genre': this.modifGenre = true; this.detail.genre = []; break;
+      case 'casting': this.modifCasting = true; break;
       case 'note': this.modifNote = true; break;
-      case 'affiche': this.modifAffiche = true;  break;
+      case 'affiche': this.modifAffiche = true; break;
       default: console.log('blem');
     }
   }
@@ -61,16 +63,56 @@ export class EditerComponent implements OnInit {
     this.crud.editer(this.filmId, modif);
   }
   //----------- GENRE :
-  quoi(coche:boolean, genre:string){
-    if(coche){
-   this.detail.genre.push(genre);
+  quoi(coche: boolean, genre: string) {
+    if (coche) {
+      this.detail.genre.push(genre);
     }
-    else{
-  this.detail.genre = this.detail.genre.filter((e:any)=> e!== genre);
+    else {
+      this.detail.genre = this.detail.genre.filter((e: any) => e !== genre);
     }
   }
-  ////////////////////////////////////////////       PUBLIER      /////////////////////////////////////////////
+  //----------- AFFICHE :----------------------------------------------------------------
+  photo = {
+    titre: this.filmId,
+    file: ''
+  }
+  urlServeur$: any;
+  urlImage: any;
+  laRef: any; leUpload: any;
+  choisirPhoto(photoChoisie: any) {
+    this.photo.file = photoChoisie.target.files[0];
+  }
+  uploader() {
+    // ETAPE 1 : créer dossier et image dans storage de firebase:
+    const leChemin = `affiches/${this.filmId}/${this.photo.titre}`;
+    this.laRef = this.afStorage.ref(leChemin);
+    this.leUpload = this.afStorage.upload(leChemin, this.photo.file);
+    // mettre à jour/créer le champ 'urlPhotos' dans firestore dbb de firebase :
+    this.enregistrerPhoto();
+    
+  }
+  enregistrerPhoto() {
+    this.leUpload.snapshotChanges() //on l'écoute, il renvoie un observable
+      //on veut récupérer l'url de la photo uploadée 
+      .pipe(
+        finalize(() => {//operateur de rxjs pour laisser le temps au serveur de récupérer url
+          this.urlServeur$ = this.laRef.getDownloadURL();//retourne un observable :
+          //on s'y abonne:
+          this.urlServeur$.subscribe((data: any) => {
+            this.urlImage = data;
+            //mettre à jour le tableau des url : 
+            this.crud.changerPhoto(this.filmId, this.urlImage);
+            this.modifAffiche=false;
+          });
+        })
+      ).subscribe();//indispensable pour récupérer un observable !!
 
+    //ensuire, apres upload, on vide le formulaire:
+    this.photo = {
+      titre: this.filmId, file: ''
+    };
+  };
+  ////////////////////////////////////////////       PUBLIER      /////////////////////////////////////////////
   messagePVis = false;
   messageP2Vis = false;
   publier1() {

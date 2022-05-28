@@ -24,7 +24,8 @@ export class ProposerComponent implements OnInit {
     nbStarsAdmin: 0,
     score:0,
     dateCreation: Date.now(),
-    classe:'detail'
+    classe:'detail',
+    url: ["https://firebasestorage.googleapis.com/v0/b/lfqnep.appspot.com/o/affiches%2Fdefaut%2Fdefaut.png?alt=media&token=2db2301d-db8c-4ab9-a562-7098c2735fae"]
   };
   // filmForm: FormGroup;
   constructor(

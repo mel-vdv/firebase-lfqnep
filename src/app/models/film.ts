@@ -16,5 +16,5 @@ export interface Film {
     published?: boolean;
     score: number;
     classe:string;
-
+    url:string[];
 }

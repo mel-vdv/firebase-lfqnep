@@ -50,7 +50,7 @@
         <div *ngFor="let affiche of films$; let i=index;">
             <div class="{{affiche.classe}}" (mouseover)="foncer(i)" (mouseleave)="defoncer(i)" (click)="nav(affiche.id!)">
                 <span> {{affiche.titre| uppercase}}</span>
-                <img src="./../../../assets/affiches/{{affiche.id}}.png" alt="dessin">
+                <img [src]="affiche.url" alt="dessin">
                 <div *ngIf="affiche.nbVotesPublic !==0" class="score">
                     Vote public:
                     <img  *ngIf="affiche.score===0" src="./../../../assets/star.png" alt='star'><img alt='star' *ngIf="affiche.score>0" src="./../../../assets/starjaune.png">

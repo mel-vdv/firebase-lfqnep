@@ -35,47 +35,79 @@
         <input *ngIf="modifTitre" type="text" name="titre" [(ngModel)]="detail.titre" required minlength="2"
             #saisieTitre="ngModel">
         <button *ngIf="modifTitre" (click)="modifTitre=false;">ok</button>
-        <div *ngIf="crayonVis && !modifTitre" (click)="editer2('titre')"><img src="./../../../assets/crayon.png" alt="crayon"></div>
+        <div *ngIf="crayonVis && !modifTitre" (click)="editer2('titre')"><img src="./../../../assets/crayon.png"
+                alt="crayon"></div>
     </div>
-<!------------------------------------------------------------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------------------------------------------------->
     <div class="etsi">
         <span *ngIf="!modifAccroche">...{{detail.accroche}}...</span>
         <input *ngIf="modifAccroche" type="text" name="titre" [(ngModel)]="detail.accroche" required
             #saisieAccroche="ngModel">
         <button *ngIf="modifAccroche" (click)="modifAccroche=false;">ok</button>
-        <div *ngIf="crayonVis && !modifAccroche" (click)="editer2('accroche')"><img src="./../../../assets/crayon.png" alt="crayon"></div>
+        <div *ngIf="crayonVis && !modifAccroche" (click)="editer2('accroche')"><img src="./../../../assets/crayon.png"
+                alt="crayon"></div>
     </div>
     <!--------------------------------------------------------------------------------------------------------------------->
     <div class="centre">
         <div class="gauche">
-            <div><img src="./../../../assets/affiches/{{detail.id}}.png" alt="affiche"></div>
-            <div *ngIf="crayonVis && !modifAffiche" (click)="editer2('affiche')"><img src="./../../../assets/crayon.png" alt="crayon"></div>
+            <div><img [src]="detail.url" alt="affiche"></div>
+         
+            <div *ngIf="crayonVis && !modifAffiche" (click)="editer2('affiche')"><img src="./../../../assets/crayon.png"
+                    alt="crayon"></div>
+            <div *ngIf="modifAffiche">
+
+                <form #uploadForm="ngForm" (ngSubmit)="uploader()">
+                    <!--important '=ngForm' !!! -->
+                    <input type="file" name="fileUpload" id='fileUpload' (change)="choisirPhoto($event)" required><br>
+                    <!--quand l'user a choisi une image sur son disque dur, $event est propore à input de type file-->
+                    <input type="text" name="titre" [(ngModel)]="photo.titre" placeholder="titre de l'image" required>
+                    <br>
+                    <button type="submit" [disabled]="uploadForm.form.invalid">UPLOADER</button>
+                </form>
+            </div>
         </div>
         <!--------------------------------------------------------------------------------------------------------------------->
 
         <div class="droite">
 
-            <span *ngIf="detail.genre.length<2">Genre:{{detail.genre}}</span> <span *ngIf="detail.genre.length>1">Genres : {{detail.genre}}</span>
-            <div *ngIf="crayonVis && !modifGenre" (click)="editer2('genre')"><img src="./../../../assets/crayon.png" alt="crayon"></div>
+            <span *ngIf="detail.genre.length<2">Genre:{{detail.genre}}</span> <span *ngIf="detail.genre.length>1">Genres
+                : {{detail.genre}}</span>
+            <div *ngIf="crayonVis && !modifGenre" (click)="editer2('genre')"><img src="./../../../assets/crayon.png"
+                    alt="crayon"></div>
             <div *ngIf="modifGenre">
-                Genre : 
-                <input type="checkbox" name="genre" id="fantastique" value="fantastique" #fantastique (change)="quoi(fantastique.checked, 'fantastique')">Fantastique
-                <input type="checkbox" name="genre" id="comedie" value="comedie" #comedie  (change)="quoi(comedie.checked, 'comedie')">Comédie
-                <input type="checkbox" name="genre" id="drame" value="drame" #drame  (change)="quoi(drame.checked,'drame')">Drame
-                <input type="checkbox" name="genre" id="romance" value="romance"#romance  (change)="quoi(romance.checked,'romance')">Romance
-                <input type="checkbox" name="genre" id="thriller" value="thriller"#thriller (change)="quoi(thriller.checked,'thriller')">Thriller
-                <input type="checkbox" name="genre" id="policier" value="policier"#policier (change)="quoi(policier.checked,'policier')">Policier
-                <input type="checkbox" name="genre" id="sf" value="sf" #sf  (change)="quoi(sf.checked,'sf')">Science-Fiction
-                <input type="checkbox" name="genre" id="dystopie" value="dystopie"#dystopie  (change)="quoi(dystopie.checked,'dystopie')">Dystopie
-                <input type="checkbox" name="genre" id="peplum" value="peplum" #peplum  (change)="quoi(peplum.checked,'peplum')">Péplum
-                <input type="checkbox" name="genre" id="historique" value="historique"#historique  (change)="quoi(historique.checked,'historique')">Historique
-                <input type="checkbox" name="genre" id="biographie" value="biographie"#biographie (change)="quoi(biographie.checked,'biographie')">biographie
-                <input type="checkbox" name="genre" id="action" value="action"#action  (change)="quoi(action.checked,'action')">Action
-                <input type="checkbox" name="genre" id="horreur" value="horreur"#horreur  (change)="quoi(horreur.checked,'horreur')">horreur
-                <input type="checkbox" name="genre" id="western" value="western"#western (change)="quoi(western.checked,'western')">Western
-            </div>  
-           <button *ngIf="modifGenre" (click)="modifGenre=false;">ok</button>
-            <div *ngIf="crayonVis && !modifGenre" (click)="editer2('genre')"><img src="./../../../assets/crayon.png" alt="crayon"></div>
+                Genre :
+                <input type="checkbox" name="genre" id="fantastique" value="fantastique" #fantastique
+                    (change)="quoi(fantastique.checked, 'fantastique')">Fantastique
+                <input type="checkbox" name="genre" id="comedie" value="comedie" #comedie
+                    (change)="quoi(comedie.checked, 'comedie')">Comédie
+                <input type="checkbox" name="genre" id="drame" value="drame" #drame
+                    (change)="quoi(drame.checked,'drame')">Drame
+                <input type="checkbox" name="genre" id="romance" value="romance" #romance
+                    (change)="quoi(romance.checked,'romance')">Romance
+                <input type="checkbox" name="genre" id="thriller" value="thriller" #thriller
+                    (change)="quoi(thriller.checked,'thriller')">Thriller
+                <input type="checkbox" name="genre" id="policier" value="policier" #policier
+                    (change)="quoi(policier.checked,'policier')">Policier
+                <input type="checkbox" name="genre" id="sf" value="sf" #sf
+                    (change)="quoi(sf.checked,'sf')">Science-Fiction
+                <input type="checkbox" name="genre" id="dystopie" value="dystopie" #dystopie
+                    (change)="quoi(dystopie.checked,'dystopie')">Dystopie
+                <input type="checkbox" name="genre" id="peplum" value="peplum" #peplum
+                    (change)="quoi(peplum.checked,'peplum')">Péplum
+                <input type="checkbox" name="genre" id="historique" value="historique" #historique
+                    (change)="quoi(historique.checked,'historique')">Historique
+                <input type="checkbox" name="genre" id="biographie" value="biographie" #biographie
+                    (change)="quoi(biographie.checked,'biographie')">biographie
+                <input type="checkbox" name="genre" id="action" value="action" #action
+                    (change)="quoi(action.checked,'action')">Action
+                <input type="checkbox" name="genre" id="horreur" value="horreur" #horreur
+                    (change)="quoi(horreur.checked,'horreur')">horreur
+                <input type="checkbox" name="genre" id="western" value="western" #western
+                    (change)="quoi(western.checked,'western')">Western
+            </div>
+            <button *ngIf="modifGenre" (click)="modifGenre=false;">ok</button>
+            <div *ngIf="crayonVis && !modifGenre" (click)="editer2('genre')"><img src="./../../../assets/crayon.png"
+                    alt="crayon"></div>
             <!-------------------------------------->
             <div>
                 <span *ngIf="!modifPitch">{{detail.pitch}} Lorem ipsum dolor sit, amet consectetur adipisicing elit.
@@ -84,7 +116,8 @@
                     excepturi dolor.</span>
                 <input *ngIf="modifPitch" type="text" name="pitch" [(ngModel)]="detail.pitch" #saisiePitch="ngModel">
                 <button *ngIf="modifPitch" (click)="modifPitch=false;">ok</button>
-                <div *ngIf="crayonVis && !modifPitch" (click)="editer2('pitch')"><img src="./../../../assets/crayon.png" alt="crayon"></div>
+                <div *ngIf="crayonVis && !modifPitch" (click)="editer2('pitch')"><img src="./../../../assets/crayon.png"
+                        alt="crayon"></div>
             </div>
             <!--------------------------------------->
             <div>
@@ -93,16 +126,17 @@
                 <input *ngIf="modifCasting" type="text" name="casting" [(ngModel)]="detail.casting"
                     #saisieCasting="ngModel">
                 <button *ngIf="modifCasting" (click)="modifCasting=false;">ok</button>
-                <div *ngIf="crayonVis && !modifCasting" (click)="editer2('casting')"><img src="./../../../assets/crayon.png" alt="crayon"></div>
+                <div *ngIf="crayonVis && !modifCasting" (click)="editer2('casting')"><img
+                        src="./../../../assets/crayon.png" alt="crayon"></div>
             </div>
             <!---------------------------------------->
             <div>
                 <span *ngIf="!modifNote">{{detail.note}} Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                     Quaerat, quas odit! </span>
-                <input *ngIf="modifNote" type="text" name="note" [(ngModel)]="detail.note"
-                    #saisieNote="ngModel">
+                <input *ngIf="modifNote" type="text" name="note" [(ngModel)]="detail.note" #saisieNote="ngModel">
                 <button *ngIf="modifNote" (click)="modifNote=false;">ok</button>
-                <div *ngIf="crayonVis && !modifNote" (click)="editer2('note')"><img src="./../../../assets/crayon.png" alt="crayon"></div>
+                <div *ngIf="crayonVis && !modifNote" (click)="editer2('note')"><img src="./../../../assets/crayon.png"
+                        alt="crayon"></div>
             </div>
             <!------------------------------------------->
         </div>
