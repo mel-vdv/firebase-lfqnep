@@ -1,3 +1,4 @@
+import { MessagerieService } from './../../services/messagerie.service';
 import { CrudservService } from './../../services/crudserv.service';
 import { Component, OnInit } from '@angular/core';
 //import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -30,7 +31,8 @@ export class ProposerComponent implements OnInit {
   // filmForm: FormGroup;
   constructor(
     // private fb : FormBuilder,
-    private crud: CrudservService
+    private crud: CrudservService,
+    private msg: MessagerieService
   ) {
 
   }
@@ -39,26 +41,29 @@ export class ProposerComponent implements OnInit {
   }
   /////////////////////////////////////////////////////////////////
   proposer() {
+    // action 1 :
    this.crud.creerFilm(this.film);
-
-    /* let envoiAdmin = {
-       to: 'melvdv@yahoo.fr',// sera remplacé par lamine.comics
-       subject:'Nouveau film posté',
-       text:'Bonjour Mathieu, veuillez cliquer sur ce lien pour consulter la participation au projet de '+this.film.auteur+'.'
-        }
-  // this.crud.mail(envoiAdmin).subscribe(()=>{
-     //  console.log('mail envoyé');
-  //  });
-       //------------
-     //  let envoiPart = {
-       //  to: this.film!.email,
-      //   subject:'Accusé de réception',
-      //   text:'Bonjour '+this.film!.auteur+', nous vous remercions pour votre participation au projet "Le film qui n\'existait pas". Vous serez prévenus lorsque votre idée sera publiée.'
-      //     }
-  //     this.crud.mail(envoiPart).subscribe(()=>{
-     //    console.log('mail envoyé');
-     //  });/*/
+    // action 2 :
      this.selection=7;
+    // action 3 : mail1
+     let mail1= {
+      to: "melvdv@yahoo.fr" ,// sera remplacé par lamine.comics
+      subject:'Nouveau projet de film posté',
+      text:'Bonjour M.La Mine, veuillez cliquer sur ce lien pour consulter la participation au projet de '+this.film.auteur+': https://lfqnep.web.app/admin'
+     }
+     this.msg.envoiMail(mail1).subscribe(()=>{
+       console.log('ok envoyé done');
+     });
+    // action 4 : mail2:
+     let mail2= {
+      to: this.film.email,
+      subject:'Accusé de réception',
+      text:'Bonjour '+this.film!.auteur+', nous vous remercions pour votre participation au projet collaboratif "Le film qui n\'existait pas". Vous serez prévenu lorsque votre idée sera illustrée et publiée.'
+    
+     }
+     this.msg.envoiMail(mail2).subscribe(()=>{
+       console.log('ok envoyé done');
+     });
   }
 
   ///////////////////////////////////////////////////////////////////

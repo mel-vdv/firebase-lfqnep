@@ -26,6 +26,7 @@ import { FilmsComponent } from './components/films/films.component';
 import { DetailComponent } from './components/detail/detail.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { EditerComponent } from './components/editer/editer.component';
+import { HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,8 @@ import { EditerComponent } from './components/editer/editer.component';
     ReactiveFormsModule,
 
     FormsModule,
+
+    HttpClientModule,
 
     AngularFireModule.initializeApp(environment.firebase),AngularFireAuthModule,  AngularFireStorageModule,
 

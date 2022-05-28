@@ -26,10 +26,7 @@ export class AdminComponent implements OnInit {
     })
   }
   //-----------
-  async publish(id: any) {
-    await this.crud.publier(id);
-  }
-  //-------------
+ 
   nav(id: string) {
     this.router.navigate([`/editer/${id}`]);
   }

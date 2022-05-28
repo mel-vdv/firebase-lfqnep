@@ -1,3 +1,4 @@
+import { MessagerieService } from './../../services/messagerie.service';
 import { CrudservService } from './../../services/crudserv.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -15,6 +16,7 @@ export class EditerComponent implements OnInit {
     private ar: ActivatedRoute,
     private crud: CrudservService,
     private afStorage: AngularFireStorage,
+    private msg : MessagerieService
   ) { }
   //////////////////////////////////////
   filmId!: string;
@@ -121,7 +123,15 @@ export class EditerComponent implements OnInit {
   publier2() {
     this.crud.publier(this.filmId);
     this.messagePVis = false;
+    let mail3= {
+      to: this.detail.email,
+      subject: 'Publication de votre idée',
+      text : `Bonjour ${this.detail.auteur}, Félicitations, Votre projet a été illustré par M.La Mine et publié sur le site du Film Qui N'existe Pas. Rendez-vous sur https://lfqnep.web.app/films. Invitez vos amis à regarder et/ou participer via ce lien.`
+    }
+    this.msg.envoiMail(mail3).subscribe(()=>{
     this.nav();
+    });
+    
   }
   //-----------
   ////////////////////////////////////////////       SUPPRIMER       /////////////////////////////////////////////
