@@ -7,18 +7,21 @@
     color: white;
 }
 .titre{
-    height: 16vh;
     width: 100vw;
-    background-color: black;
-    
     display: flex; align-items: center; justify-content: center;
-    font-size: 4em;
+    height: 5vw;
+    background-color: white;
+}
+img[alt='bande']{
+width: 100%;
+height: 4.2vw;
 }
 img[alt='logo']{
     height: 16vh; width: auto;
 }
 .rubriques{
     display: flex; width: 100%; height: 80vh; justify-content: space-around;
+    align-items: center;
 }
 .droite, .centre, .gauche{
     width: 25%;
@@ -42,12 +45,19 @@ a{
     color: white;
     text-decoration: none;
 }
-a:hover{
-    text-decoration: underline;
+.droite div:hover, .gauche div:hover{
+    background-color: rgba(0,0,0,0.2);
 }
-.droite{
+.centre{
+    width: 50vw;
     color: rgb(192, 192, 192);
     border: 0.1vw white solid;
+    box-shadow: 0 0 3vw rgba(255,255,255,0.3);
     border-radius: 5vh;
     padding: 4vh;
+    font-size: 4vh;
+    font-weight: 600;
+}
+*{
+    font-family: 'Square Peg';
 }

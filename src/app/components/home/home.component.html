@@ -1,21 +1,20 @@
 <div class="container">
     <div class="titre">
-        <div><img src="./../../../assets/logo.png" alt="logo"></div>
-        <div>Le film qui n'existait pas </div>
+        <img src="./../../../assets/bande.png" alt="bande">
     </div>
     <div class="rubriques">
-        <div class="droite">
+        <div class="gauche">
+            <div (click)="decouvrir=true" *ngIf="!decouvrir" >DECOUVRIR</div>
+            <div *ngIf="decouvrir"><a routerLink="/films">Les films à l'affiche</a> </div>
+            <div *ngIf="decouvrir"><a routerLink="/oscars">Les oscars</a></div>
+        </div>
+        <div class="centre">
             Le cinéma, ce n'est pas seulement les films qu'on voit, c'est aussi ceux qu'on se fait dans la tête; être cinéphile, c'est aussi aimer les films qui n'existent pas, ou les films tels qu'ils auraient pu être. <br> <br>
                 Le projet collaboratif "Le Film qui n'existait pas" vise à faire émerger des idées de films imaginaires, de films qu'on aurait aimé voir et qu'on ne verra jamais pour la bonne raison qu'ils n'existent pas, ou ne pourront jamais exister. <br> <br>
                 Le projet est ouvert aux idées sérieuses ou parodiques.
         
         </div>
-        <div class="centre">
-            <div (click)="decouvrir=true" *ngIf="!decouvrir" >DECOUVRIR</div>
-            <div *ngIf="decouvrir"><a routerLink="/films">Les films à l'affiche</a> </div>
-            <div *ngIf="decouvrir"><a routerLink="/oscars">Les oscars</a></div>
-        </div>
-        <div class="gauche">
+        <div class="droite">
             <div (click)="participer=true;" *ngIf="!participer">PARTICIPER</div>
             <div *ngIf="participer"><a routerLink="/proposer">Proposer un film</a></div>
             <div *ngIf="participer"><a routerLink="/concours">Participer au concours</a></div>

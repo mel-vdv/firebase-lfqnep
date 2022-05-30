@@ -1,177 +1,192 @@
-<!--
-mon idée:
+<div class="containerultime">
+    <div class="pub"></div>
 
-    <form [formGroup]="filmForm" (ngSubmit)="proposer()">
-        titre: <input type="text" formControlName="titre">
-        accroche:<input type="text" formControlName="accroche">
-        genre:<input type="text" formControlName="genre">
-        pitch:<input type="text" formControlName="pitch">
-        note:<input type="text" formControlName="note">
-        casting:<input type="text" formControlName="casting">
-        pseudo:<input type="text" formControlName="auteur
-        ">
-        email:<input type="text" formControlName="email">
+<div class="container">
 
-        <button type="submit">envoyer mon idée</button>
-    </form>
+    <div class="nav"></div>
 
--->
+    <div class="bureau">
 
-    <div
-    class="principal">
-    <img class="fond" src="./../../../assets/bois.png">
-    <img class="machine" src="./../../../assets/machine.png">
-    <img class="journal" [src]="'./../../../assets/'+ideeRandom+'.png'">
-    
-    <div class="texte">
-    <p *ngIf="fini">Votre proposition de film a été envoyée avec succès.</p>
-    
-    <div *ngIf="!fini">
-    <div class="rubriques">
-        <div (click)="select(0)">Film</div>
-        <div (click)="select(1)">Genre</div>
-        <div (click)='select(2)'>Résumé</div>
-        <div (click)="select(3)">Casting</div>
-        <div (click)="select(4)">Note</div>
-        <div (click)="select(5)">Bonus</div>
-        <div (click)="select(6)">Envoi</div>
-    </div>
-        <div *ngIf="selection===0"> <form>
-            <div>
-               
-                    Titre:
-                    <input type="text" name="titre" [(ngModel)]="film.titre" required minlength="2" #saisieTitre="ngModel">
-                    <img *ngIf="saisieTitre.valid && saisieTitre.touched" src="./../../../assets/ok.png" height="20px">
-                    <p class="error" *ngIf="(saisieTitre.invalid && saisieTitre.touched)">Le titre doit comporter minimum 2 caractères.</p>
-                    <img height="40px" (click)='aider(1)' src="./../../../assets/question.png" alt="question">
-                    <div *ngIf="aide===1">
-                        <p> Attention, il ne s'agit PAS de parler de projets de films qui ont existé et ont capoté (comme
-                            par
-                            exemple 'Dune' de Jodorowsky ou 'Napoléon' de Kubrick).
-                        </p>
-                        <button (click)="fermerAide()">X</button>
+        <img class="fond" src="./../../../assets/bois.png">
+        <img class="machine" src="./../../../assets/machine.png">
+        <img class="journal" src="./../../../assets/journal.png" alt="journal">
+        <img *ngIf="!aide && clikIdee" class="journal" [src]="'./../../../assets/'+ideeRandom+'.png'">
+        <div *ngIf="aide" class="warning"><img src="./../../../assets/warning.png" alt="warning">
+            <div>{{warning}} </div>
+        </div>
+        <div class="ampoule"><img (click)="random()" src="./../../../assets/off.png" alt="ampoule">
+            <div *ngIf="clikIdee" (click)="random()" class="eclairage"></div>
+
+        </div>
+        <div class="texte">
+            <p *ngIf="fini">Votre proposition de film a été envoyée avec succès.</p>
+
+            <div *ngIf="!fini">
+                <div class="rubriques">
+                    <div id="film" class="selectionne" (click)="select(0, 'film')">Film</div>
+                    <div id="genre" (click)="select(1, 'genre')">Genre</div>
+                    <div id="resume" (click)="select(2, 'resume')">Résumé</div>
+                    <div id="casting" (click)="select(3, 'casting')">Casting</div>
+                    <div id="note" (click)="select(4,'note')">Note</div>
+                    <div id="bonus" (click)="select(5,'bonus')">Bonus</div>
+                    <div id="envoi" (click)="select(6,'envoi')">Envoi</div>
+                </div>
+                <div *ngIf="selection===0" class="contenu">
+                    <form>
+                        <div class="titre">
+                            <span>Titre :</span><img (click)='aider(1)' src="./../../../assets/question.png"
+                                alt="question">
+                            <input type="text" name="titre" [(ngModel)]="film.titre" required minlength="2"
+                                #saisieTitre="ngModel">
+                        </div>
+                        <div>
+                            <span>Accroche :</span><img (click)='aider(2)' src="./../../../assets/question.png"
+                                alt="question">
+                            <textarea name="accroche" id="accroche" cols="45" rows="30" [(ngModel)]="film.accroche"
+                                required #saisieAccroche="ngModel"></textarea>
+                        </div>
+                    </form>
+
+                </div>
+
+                <div *ngIf="selection===1" class="contenu">
+                    <div class="genres">
+                        <div><span>Genre :</span> </div>
+                        <div class="chek">
+                            <div> <input type="checkbox" name="genre" id="fantastique" value="fantastique" #f [checked]="fantastique"
+                                (change)="cocherGenre(f.value,f.checked)"[(ngModel)]=" fantastique"> Fantastique</div>
+                            <div> <input type="checkbox" name="genre" id="comedie" value="comedie" #com [checked]="comedie"
+                                    (change)="cocherGenre(com.value,com.checked)" [(ngModel)]="comedie">Comédie</div>
+
+                            <div> <input type="checkbox" name="genre" id="romance" value="romance" #rom [checked]="romance"
+                                    (change)="cocherGenre(rom.value,rom.checked)"[(ngModel)]='romance'>Romance</div>
+                            <div> <input type="checkbox" name="genre" id="thriller" value="thriller" #thri [checked]="thriller"
+                                    (change)="cocherGenre(thri.value, thri.checked)"[(ngModel)]='thriller'>Thriller</div>
+                            <div><input type="checkbox" name="genre" id="policier" value="policier" #pol [checked]="policier"
+                                    (change)="cocherGenre(pol.value,pol.checked)"[(ngModel)]='policier'>Policier</div>
+                            <div><input type="checkbox" name="genre" id="sf" value="sf" #sfi [checked]="sf"
+                                    (change)="cocherGenre(sfi.value,sfi.checked)"[(ngModel)]='sf'>Science-Fiction</div>
+                        </div>
+                        <div class="chek">
+                            <div><input type="checkbox" name="genre" id="dystopie" value="dystopie" #dys [checked]="dystopique"
+                                    (change)="cocherGenre(dys.value,dys.checked)"[(ngModel)]='dystopique'>Dystopie</div>
+                            <div><input type="checkbox" name="genre" id="peplum" value="peplum" #pep [checked]="peplum"
+                                    (change)="cocherGenre(pep.value,pep.checked)"[(ngModel)]='peplum'>Péplum</div>
+                            <div><input type="checkbox" name="genre" id="historique" value="historique" #hist [checked]="historique"
+                                    (change)="cocherGenre(hist.value,hist.checked)"[(ngModel)]='historique'>Historique</div>
+                            <div><input type="checkbox" name="genre" id="biographie" value="biographie" #bio [checked]="biographie"
+                                    (change)="cocherGenre(bio.value,bio.checked)"[(ngModel)]='biographie'>Biographie</div>
+                            <div><input type="checkbox" name="genre" id="action" value="action" #act [checked]="action"
+                                    (change)="cocherGenre(act.value,act.checked)"[(ngModel)]='action'>Action</div>
+                            <div><input type="checkbox" name="genre" id="horreur" value="horreur" #horr [checked]="horreur"
+                                    (change)="cocherGenre(horr.value,horr.checked)"[(ngModel)]='horreur'>Horreur</div>
+                            <div><input type="checkbox" name="genre" id="western" value="western" #west [checked]="western"
+                                    (change)="cocherGenre(west.value,west.checked)"[(ngModel)]='western'>Western</div>
+                        </div>
                     </div>
-    
-            </div>
-            <div>
-                Accroche:
-                <input type="text" name="accroche" [(ngModel)]="film.accroche" required #saisieAccroche="ngModel">
-                <img *ngIf="saisieAccroche.valid&&saisieAccroche.touched" src="./../../../assets/ok.png" height="20px">
-                <p class="error" *ngIf="saisieAccroche.invalid&&saisieAccroche.touched">Veuillez saisir une accroche commmençant par "Et si"</p>
-                <img height="40px" (click)='aider(2)' src="./../../../assets/question.png" alt="question">
-                <div *ngIf="aide===2">
-                    <p>l'accroche doit obligatoirement commencer par "et si..."</p>
-                    <button (click)="fermerAide()">X</button>
+                </div>
+
+
+                <div *ngIf="selection===2" class="contenu">
+                    <form>
+                        <div>
+                            <span>Résumé :</span> <img (click)='aider(3)' src="./../../../assets/question.png"
+                                alt="question">
+                            <textarea name="pitch" id="pitch" cols="40" rows="30" name="pitch" [(ngModel)]="film.pitch"
+                                required #saisiePitch="ngModel"></textarea>
+                        </div>
+                    </form>
+                </div>
+
+                <div *ngIf="selection===3" class="contenu">
+                    <form>
+                        <div class="cast">
+                            <span>Casting : </span> (* facultatif)<br>
+                            <table>
+                                <thead>
+                                    <th>Acteur :</th>
+                                    <th>Rôle :</th>
+                                </thead>
+                                <tbody>
+                                 <tr>
+                                     <td><input type="text" id="acteur1" name="acteur1" [(ngModel)]="acteur1" ></td>
+                                     <td><input type="text" id="role1" name="role1" [(ngModel)]="role1"> </td>
+                                 </tr>
+                                 <tr>
+                                    <td><input type="text" id="acteur2" name="acteur2" [(ngModel)]="acteur2" ></td>
+                                    <td><input type="text" id="role2" name="role2" [(ngModel)]="role2"> </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" id="acteur3" name="acteur3" [(ngModel)]="acteur3" ></td>
+                                    <td><input type="text" id='role3' name="role3" [(ngModel)]="role3"> </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" id="acteur4" name="acteur4" [(ngModel)]="acteur4" ></td>
+                                    <td><input type="text" id="role4" name="role4" [(ngModel)]="role4"> </td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </form>
+                </div>
+
+                <div *ngIf="selection===4" class="contenu">
+                    <form>
+                        <div>
+                            <span>Note d'intention :</span> <img height="40px" (click)='aider(5)'
+                                src="./../../../assets/question.png" alt="question">
+                            <br>
+                            <textarea name="note" id="note" cols="30" rows="10" [(ngModel)]="film.note"
+                                #saisieNote="ngModel"></textarea>
+                        </div>
+                    </form>
+                </div>
+
+                <div *ngIf="selection===5" class="contenu">
+                    <form>
+                        <span>Bonus</span>(* facultatif) :<img (click)='aider(6)' src="./../../../assets/question.png"
+                            alt="question">
+                        <br>
+                        <textarea name="bonus" id="bonus" cols="30" rows="10" [(ngModel)]="film.bonus"
+                            #saisieBonus="ngModel"></textarea>
+                    </form>
+                </div>
+
+                <div *ngIf="selection===6" class="contenu">
+                    <form>
+                        <div>
+                            <span>Pseudo :</span>
+                            <input type="text" name="pseudo" [(ngModel)]="film.auteur" required>
+                        </div>
+                        <div>
+
+                            <span>Email :</span>
+                            <input type="text" name="email" [(ngModel)]="film.email" required>
+                        </div>
+                        <br>
+                        <input type="checkbox" value="rgpd" name="accord" #rgpd id="rgpd" [checked]="rgpd.checked">
+                        J'accepte que, s'il est retenu, mon projet soit eventuellement corrigé, ensuite illustré et
+                        publié sur le site lfqnep ainsi que sur les pages fb et instagram dédiées. <br>
+                        <input type="checkbox" value="cgu" name="accord" id="cgu" #cgu [checked]="cgu.checked">cgu
+                        <br>
+                        <div id="poster" (click)="proposer()" [hidden]="!cgu.checked || !rgpd.checked">POSTER <img
+                                src="./../../../assets/avion.png" alt="avion"></div>
+
+                    </form>
+                </div>
+                <div *ngIf="selection===7" class="contenu">
+                    <div id="merci">
+                        <br><br>
+                        Merci {{film.auteur}} d'avoir participé à ce projet collaboratif. <br><br>
+                        Un email de confirmation vous a été envoyé à {{film.email}}
+                    </div>
                 </div>
             </div>
-            <br>
-            <br>
-            <img (click)="random()" height="50px" src="./../../../assets/ampoule.png" alt="ampoule">
-            <p *ngIf="clikIdee"></p>
-    
-            </form>
-    
-        </div>
-
-        <div  *ngIf="selection===1">
-            <div>
-                Genre : 
-                <input type="checkbox" name="genre" id="fantastique" value="fantastique" #fantastique (change)="quoi(fantastique.checked, 'fantastique')">Fantastique
-                <input type="checkbox" name="genre" id="comedie" value="comedie" #comedie  (change)="quoi(comedie.checked, 'comedie')">Comédie
-                <input type="checkbox" name="genre" id="drame" value="drame" #drame  (change)="quoi(drame.checked,'drame')">Drame
-                <input type="checkbox" name="genre" id="romance" value="romance"#romance  (change)="quoi(romance.checked,'romance')">Romance
-                <input type="checkbox" name="genre" id="thriller" value="thriller"#thriller (change)="quoi(thriller.checked,'thriller')">Thriller
-                <input type="checkbox" name="genre" id="policier" value="policier"#policier (change)="quoi(policier.checked,'policier')">Policier
-                <input type="checkbox" name="genre" id="sf" value="sf" #sf  (change)="quoi(sf.checked,'sf')">Science-Fiction
-                <input type="checkbox" name="genre" id="dystopie" value="dystopie"#dystopie  (change)="quoi(dystopie.checked,'dystopie')">Dystopie
-                <input type="checkbox" name="genre" id="peplum" value="peplum" #peplum  (change)="quoi(peplum.checked,'peplum')">Péplum
-                <input type="checkbox" name="genre" id="historique" value="historique"#historique  (change)="quoi(historique.checked,'historique')">Historique
-                <input type="checkbox" name="genre" id="biographie" value="biographie"#biographie (change)="quoi(biographie.checked,'biographie')">biographie
-                <input type="checkbox" name="genre" id="action" value="action"#action  (change)="quoi(action.checked,'action')">Action
-                <input type="checkbox" name="genre" id="horreur" value="horreur"#horreur  (change)="quoi(horreur.checked,'horreur')">horreur
-                <input type="checkbox" name="genre" id="western" value="western"#western (change)="quoi(western.checked,'western')">Western
-            </div>
-        </div>
-
-    
-        <div *ngIf="selection===2"><form>
-            <div>
-                Pitch:
-                
-                <textarea name="" id="" cols="30" rows="5" name="pitch" [(ngModel)]="film.pitch" required #saisiePitch="ngModel"></textarea>
-                <img *ngIf="saisiePitch.valid&&saisiePitch.touched" src="./../../../assets/ok.png" height="20px">
-                <p class="error" *ngIf="saisiePitch.invalid&&saisiePitch.touched">Veuillez saisir un résumé de maximum 100 caractères</p>
-                
-                
-                <img height="40px" (click)='aider(3)' src="./../../../assets/question.png" alt="question">
-                <div *ngIf="aide===3">
-                    <p></p>
-                    <button (click)="fermerAide()">X</button>
-                </div>
-            </div>
-        </form></div>
-    
-        <div *ngIf="selection===3"><form>
-           
-            <div>
-                Casting:
-                <input type="text" name="casting" [(ngModel)]="film.casting" required #saisieCasting="ngModel">
-                <img *ngIf="saisieCasting.valid&&saisieCasting.touched" src="./../../../assets/ok.png" height="20px">
-                <p class="error" *ngIf="saisieCasting.invalid&&saisieCasting.touched">Veuillez saisir un casting.</p>
-                
-                <img height="40px" (click)='aider(4)' src="./../../../assets/question.png" alt="question">
-                <div *ngIf="aide===4">
-                    <p></p>
-                    <button (click)="fermerAide()">X</button>
-                </div>
-            </div>
-        </form></div>
-    
-        <div *ngIf="selection===4"><form>
-            <div>
-                Note d'intention:
-                <input type="text" name="note" [(ngModel)]="film.note" #saisieNote = "ngModel">
-                <img *ngIf="saisieNote.valid&&saisieNote.touched" src="./../../../assets/ok.png" height="20px">
-                <p class="error" *ngIf="saisieNote.invalid&&saisieNote.touched">Veuillez saisir une note.</p>
-                
-                <img height="40px" (click)='aider(5)' src="./../../../assets/question.png" alt="question">
-                <div *ngIf="aide===5">
-                    <p></p>
-                    <button (click)="fermerAide()">X</button>
-                </div>
-            </div>
-        </form></div>
-    
-        <div *ngIf="selection===5"><form>
-            BONUS
-            <img height="40px" (click)='aider(6)' src="./../../../assets/question.png" alt="question">
-            <div *ngIf="aide===6">
-                <p>Votre touche personnelle (facultatif)</p>
-                <button (click)="fermerAide()">X</button>
-            </div>
-        </form></div>
-    
-        <div *ngIf="selection===6"><form>
-            <div>
-                Pseudo:
-                <input type="text" name="pseudo" [(ngModel)]="film.auteur" required>
-            </div>
-            <div>
-                Email:
-                <input type="text" name="email" [(ngModel)]="film.email" required>
-            </div>
-            <input type="checkbox" value="rgpd" name="accord" #rgpd id="rgpd" [checked]="rgpd.checked" > J'accepte que, s'il est retenu, mon projet soit eventuellement corrigé, ensuite illustré et
-            publié sur le site lfqnep ainsi que sur les pages fb et instagram dédiées. <br>
-            <input type="checkbox" value="cgu" name="accord" id="cgu" #cgu [checked]="cgu.checked" ><br>
-         
-            <button (click)="proposer()" [disabled]="!cgu.checked || !rgpd.checked">POSTER</button>
-
-        </form></div>
-
-        <div *ngIf="selection===7">
-            <div>Merci {{film.auteur}} d'avoir participé à ce projet collaboratif.</div>
-            <div>Un email de confirmation vous a été envoyé à {{film.email}}</div>
         </div>
     </div>
+</div>   
+
+<div class="pub"></div>
 </div>
-  

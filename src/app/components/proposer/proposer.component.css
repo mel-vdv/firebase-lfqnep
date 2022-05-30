@@ -1,34 +1,72 @@
+
+.container{
+    height: 100vh;
+    width: 100vw;
+    position: fixed; top:0px; left:0px;
+    font-family: 'Special Elite';
+}
 .error{
     font-weight: bold;
     color:red;
 }
 .nav{
-    height: 10vh;
+    height: 7vh;
     background-color:rgb(54,51,51);
 }
-.principal{
-    height: 90vh;
+.bureau{
+    height: 93vh;
 }
 .fond{
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
     z-index: 5;
 }
 .machine{
     position: absolute;
-    top: 10vh;
-    left: 20vw;
+    top: 7vh;
+    left: 5vw;
     z-index: 4;
     height: 90%;
-    max-width: 60%;
+    width: 60%;
+}
+.ampoule{
+    z-index: 4;
+    position: fixed;
+    top: 10vh;
+    left: 63vw;
+}
+.ampoule img{
+    height: 10vh;
+  
+}
+.eclairage{
+    width: 5vh;
+    height: 5vh;
+    border-radius: 100%;
+    background-color: rgba(245, 245, 106, 0.5);
+    box-shadow: 0 0 5vh yellow , 0 0 3vh rgb(252, 246, 161);
+    animation: briller 0.8s ;
+    animation-iteration-count: 8;
+    position: relative;
+    top: -10vh;
+}
+
+
+@keyframes briller {
+    0%,100%{
+  transform: scale(1);
+    }
+    50%{
+transform : scale(1.15);
+    }
 }
 .journal{
     position: absolute;
-    top: 40vh;
-    left: 60vw;
+    top: 20vh;
+    left: 70vw;
     z-index: 4;
-    height: 50%;
-    max-width: 60%;
+    height: 70%;
+    width: 25vw;
 }
 .texte{
     position: absolute;
@@ -43,13 +81,123 @@
 }
 .rubriques{
     display: flex;
+    position: fixed;
+    top: 8.8vh;
+    left: 12.8vw;
+    height: 5vh;
+    width: 40vw;
 }
 .rubriques div{
+    box-sizing: border-box;
     border: solid 2px rgb(76,43,34);
-    
-    font-size: small;
-}
+   padding: 0.2vw;
+   font-size: 1.5vw;
+    display: flex; justify-content: center; align-items: center;
+} 
 .rubriques div:hover{
-    border-bottom: hidden;
+    font-weight: bold;
+}
+ div .selectionne{
+     border: solid 2px rgb(76,43,34);
+     border-bottom: hidden;
+      }
+ 
+.warning{
+    position: absolute;
+    top: 25vh;
+    left: 70vw;
+    z-index: 4;
+    height: 50vh;
+    width: 20vw;
+    padding: 2.5vw;
+    color: red;
+    font-size: 2vw;
+}
+.warning img{
+    height: 8vw;
+    display: block;
+    margin: auto;
+    margin-bottom: 3vh;
    
 }
+.contenu {
+    width: 35vw;
+    height: 45vh;
+    position: fixed;
+    top:16.5vh;
+    left: 17vw;
+}
+textarea{
+    width:35vw;
+    height: 25vh;
+}
+input[type='text']{
+    width: 35vw; height: 5vh;
+}
+input[type='text'], textarea{
+
+    background: none;
+    font-size: 2vw;
+    letter-spacing: 0.2vw;
+    outline: none;
+    border: rgba(124,96,79,0.1) 1px solid;
+    border-radius: 1vh; 
+    margin-right: 1vw;
+    font-family:  'Special Elite';
+}
+input[type='text']:focus, textarea:focus{
+    outline: none;
+    border-color: rgba(124,96,79,0);
+}
+
+[type="checkbox"]:checked{
+   accent-color: rgb(124,96,79);
+}
+span{
+    font-weight: bold;
+    margin-right: 1vw;
+}
+img[alt="question"]{
+    height:3vh ;
+    position: absolute;
+    left: 33vw;
+}
+#pitch{
+    width:35vw;height: 35vh;
+}
+.genres{
+    display: flex;
+}
+.chek{
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items:flex-start ;
+    flex-wrap: wrap;
+    height: 60vh;
+}
+img[alt='ampoule']{
+    height: 7vh;
+}img[alt='avion']{
+    height: 5vh;
+}
+#poster{
+    margin: auto;
+    width: 50%;
+    border: 0.1vw solid black;
+    border-radius: 1vh;
+    background-color: rgba(0,0,0,0);
+    font-family: "Special Elite";
+    font-weight: bold;
+    text-align: center;
+}
+td {
+    border: 0.05vw solid rgb(76,43,34);
+}
+td input{
+ width: 15vw;
+ border-color:rgba(0,0,0,0) ;
+}
+@media screen and (min-width: 1500px) {
+
+  }

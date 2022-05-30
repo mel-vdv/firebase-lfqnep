@@ -8,13 +8,14 @@ export interface Film {
     genre: string[];
     pitch:string;
     note:string;
-    casting:string;
-    nbStarsPublic?:number;
-    nbVotesPublic?: number;
-    nbStarsAdmin?:number;
+    casting:any[];
+    nbStarsPublic:number;
+    nbVotesPublic: number;
+    nbStarsAdmin:number;
     //affiche?:Buffer;
-    published?: boolean;
+    published: boolean;
     score: number;
     classe:string;
     url:string[];
+    bonus?:any;
 }
