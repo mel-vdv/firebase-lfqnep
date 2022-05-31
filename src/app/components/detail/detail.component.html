@@ -1,32 +1,45 @@
 <div class="container">
 
-    <div class="nav"></div>
-    <div class="titre"><span>{{detail.titre |uppercase}}</span></div>
-    <div class="etsi">...{{detail.accroche}}...</div>
+    <div class="nav">
+        <div (click)="nav()">retour</div>
+        <div class="titre">{{detail.titre |uppercase}}</div>
+        <div>logo</div>
+    </div>
+
     <div class="centre">
         <div class="gauche">
             <div><img [src]="detail.url" alt="affiche"></div>
         </div>
         <div class="droite">
-            <div><span *ngIf="detail.genre.length<2">Genre:</span> <span *ngIf="detail.genre.length>1">Genres :</span> {{detail.genre}}</div>
-            <div><span>Résumé:</span> <br>  {{detail.pitch}} Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt molestias doloremque nostrum quia ad officia, harum culpa maxime quibusdam laudantium autem accusantium voluptates delectus totam ex. Molestias magni vero eum accusantium eius dicta id quis repellat explicabo, provident libero adipisci sunt esse repudiandae ipsum maxime numquam obcaecati assumenda reiciendis incidunt.</div>            
-            <div><span>Casting :</span>  {{detail.casting}}</div>
-            <div><span>Note d'intention:</span> <br> {{detail.note}} Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima, veritatis.</div>
+            <div >...{{detail.accroche}}...</div> <br>
+            <div><span *ngIf="detail.genre.length<2">Genre:</span> <span *ngIf="detail.genre.length>1">Genres :</span> <br>
+                {{detail.genre}}</div>
+            <div><span>Résumé:</span> <br> 
+                {{detail.pitch}} Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Nesciunt molestias doloremque nostrum quia ad officia, harum culpa maxime quibusdam laudantium autem
+                accusantium voluptates delectus totam ex. Molestias magni vero eum accusantium eius dicta id quis
+                repellat explicabo, provident libero adipisci sunt esse repudiandae ipsum maxime numquam obcaecati
+                assumenda reiciendis incidunt.</div>
+            <div><span>Casting :</span> <br>
+                 {{detail.casting}}</div>
+            <div><span>Note d'intention:</span> <br> 
+                {{detail.note}} Lorem ipsum dolor sit amet consectetur, adipisicing
+                elit. Minima, veritatis.</div>
         </div>
     </div>
     <div class="jevote" *ngIf="!voteDone">
-        
+
         <img *ngIf="!vote " src="./../../../assets/star.png" alt="star" (click)="voter(1)">
-        <img *ngIf="vote>0" src="./../../../assets/starjaune.png" alt="star"(click)="voter(1)">
+        <img *ngIf="vote>0" src="./../../../assets/starjaune.png" alt="star" (click)="voter(1)">
         <img *ngIf="!vote || vote<2" src="./../../../assets/star.png" alt="star" (click)="voter(2)">
-        <img *ngIf="vote>1" src="./../../../assets/starjaune.png" alt="star"(click)="voter(2)">
+        <img *ngIf="vote>1" src="./../../../assets/starjaune.png" alt="star" (click)="voter(2)">
         <img *ngIf="!vote || vote<3" src="./../../../assets/star.png" alt="star" (click)="voter(3)">
-        <img *ngIf="vote>2" src="./../../../assets/starjaune.png" alt="star"(click)="voter(3)">
+        <img *ngIf="vote>2" src="./../../../assets/starjaune.png" alt="star" (click)="voter(3)">
         <img *ngIf="!vote || vote<4" src="./../../../assets/star.png" alt="star" (click)="voter(4)">
-        <img *ngIf="vote>3" src="./../../../assets/starjaune.png" alt="star"(click)="voter(4)">
+        <img *ngIf="vote>3" src="./../../../assets/starjaune.png" alt="star" (click)="voter(4)">
         <img *ngIf="!vote|| vote<5" src="./../../../assets/star.png" alt="star" (click)="voter(5)">
-        <img *ngIf="vote>4" src="./../../../assets/starjaune.png" alt="star"(click)="voter(5)">
-        <button (click)="sendVote()" [disabled]="!vote">JE VOTE  </button>
+        <img *ngIf="vote>4" src="./../../../assets/starjaune.png" alt="star" (click)="voter(5)">
+        <button (click)="sendVote()" [disabled]="!vote">JE VOTE </button>
     </div>
     <div class="jevote" *ngIf="voteDone">Merci pour votre Vote. </div>
 

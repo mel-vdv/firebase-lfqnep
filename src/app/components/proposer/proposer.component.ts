@@ -181,7 +181,10 @@ switch(genre){
 }
 
 
-
+/////////////////////////////////
+retour(){
+  this.router.navigate([`/`]);
+}
 
 }
 

@@ -1,6 +1,10 @@
 <div class="container">
 
-    <div class="nav"></div>
+    <div class="nav">
+            <div (click)="retour()"><img src="./../../../assets/fleche.png" alt="fleche"></div>
+            <div>ACTUELLEMENT DANS LES SALLES :</div>
+            <div><img src="./../../../assets/logo-blanc.png" alt="logo"></div>
+    </div>
 
     <div class="recherche">
         <div class="haut">
@@ -19,12 +23,12 @@
                     (change)="choisir('voteA')">Vote de l'administration
             </div>
             <div> <input type="radio" id="motcle" value="motcle" name="rech" [(ngModel)]="critere"
-                    (change)="choisir('motcle')">Mot-clé(s)
+                    (change)="choisir('motcle')">Mot-cle(s)
             </div>
         </div>
         <div class="bas">
             <div *ngIf="critere==='genre'">
-                Sélectionnez un genre : <br><br>
+                Selectionnez : <br><br>
                 <div> <input type="radio" id="drame" value="drame" name="choixGenre"
                         (change)="choisirGenre('drame')">Drame</div>
                 <div> <input type="radio" id="thriller" value="thriller" name="choixGenre"
@@ -36,7 +40,7 @@
                 <div> <input type="radio" id="fantastique" value="fantastique" name="choixGenre"
                         (change)="choisirGenre('fantastique')">Fantastique</div>
                 <div> <input type="radio" id="comedie" value="comedie" name="choixGenre"
-                        (change)="choisirGenre('comedie')">Comédie</div>
+                        (change)="choisirGenre('comedie')">Comedie</div>
                 <div> <input type="radio" id="policier" value="policier" name="choixGenre"
                         (change)="choisirGenre('policier')">Policier</div>
                 <div> <input type="radio" id="action" value="action" name="choixGenre"
@@ -48,14 +52,16 @@
                 <div> <input type="radio" id="western" value="western" name="choixGenre"
                         (change)="choisirGenre('western')">Western</div>
                 <div> <input type="radio" id="peplum" value="peplum" name="choixGenre"
-                        (change)="choisirGenre('peplum')">Péplum</div>
+                        (change)="choisirGenre('peplum')">Peplum</div>
                 <div> <input type="radio" id="sf" value="sf" name="choixGenre"
                         (change)="choisirGenre('sf')">Science-Fiction</div>
             </div>
             <div *ngIf="critere==='motcle'">
-                <span> Entrer un Mot clé : </span>
-                <input type="text" id="motcle" name="motcle" [(ngModel)]="motcle">
-                <button (click)="rechMotcle()">rechercher</button>
+                <span> Entrez un  </span> <br>
+                <span> ou plusieurs</span> <br>
+                <span> Mot cle :</span>
+                <input type="text" id="motcle" name="motcle" [(ngModel)]="motcle"> <br>
+                <button (click)="rechMotcle()">Rechercher</button>
             </div>
         </div>
     </div>

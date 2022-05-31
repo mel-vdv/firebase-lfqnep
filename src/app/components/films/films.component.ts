@@ -84,4 +84,8 @@ export class FilmsComponent implements OnInit {
   nav(id: string) {
     this.router.navigate([`/detail/${id}`]);
   }
+  //----------
+  retour(){
+    this.router.navigate([`/`]);
+  }
 }

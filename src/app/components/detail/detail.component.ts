@@ -1,6 +1,6 @@
 import { CrudservService } from './../../services/crudserv.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Film } from 'src/app/models/film';
 
@@ -16,7 +16,8 @@ export class DetailComponent implements OnInit, OnDestroy {
   vote = 0;
   constructor(
     private crud: CrudservService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {
 
 
@@ -43,7 +44,10 @@ export class DetailComponent implements OnInit, OnDestroy {
     this.voteDone=true;
     this.crud.voter(this.filmId, this.vote);
   }
-
+///////////////////////////
+nav(){
+  this.router.navigate([`/films`]);
+}
   /////////////////////////////////////////////////
   ngOnDestroy(): void {
     this.sub.unsubscribe();

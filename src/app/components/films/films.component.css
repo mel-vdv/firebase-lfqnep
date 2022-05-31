@@ -1,17 +1,32 @@
+
 .container{
-position: absolute; top:0px; left:0px;
+position: fixed; top:0px; left:0px;
 height: 100vh; width: 100vw;
 display: flex;
 flex-wrap: wrap;
 }
 .nav{
- background-color:grey;
- height: 10vh;
- width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    height: 10vh;
+    width: 100vw;
+    color: white;
+    font-size: 5vh;
+    font-family: 'craie';
+    background-color:rgb(54,51,51);
 }
 .recherche{
-    background-color: burlywood;
+    position: fixed;
+    top:10vh;left:0px;
+    background-color:rgb(77, 68, 68);
+    padding:2vw;
     width: 20vw; height: 90vh;
+    color: white;
+    font-size: 1.5vw;
+    font-family: 'craie';
+    letter-spacing: 0.15vw;
 }
 .haut{
     height: 35%;
@@ -25,7 +40,7 @@ flex-wrap: wrap;
     background-attachment:local;
     background-repeat: repeat-y;
     overflow: scroll;
-
+    position: fixed;
     top:10vh;left:20vw;
     width: 80vw;
     height: 90vh;
@@ -93,5 +108,11 @@ img[alt='star']{
 @font-face {
     font-family: "craie";
     src: url(./../../../assets/ColoredCrayons-7wPR.ttf) format("truetype");
+  }
+  button{
+      font-family: 'craie';
+  }
+  img[alt='logo'], img[alt='fleche']{
+      height: 9vh;
   }
 

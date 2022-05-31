@@ -10,8 +10,12 @@
     color:red;
 }
 .nav{
-    height: 7vh;
+    height: 7vh; width: 100vw;
     background-color:rgb(54,51,51);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
 }
 .bureau{
     height: 93vh;
@@ -201,3 +205,6 @@ td input{
 @media screen and (min-width: 1500px) {
 
   }
+  img[alt='logo'], img[alt='fleche']{
+    height: 6.5vh;
+}
