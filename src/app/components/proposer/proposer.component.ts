@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { MessagerieService } from './../../services/messagerie.service';
 import { CrudservService } from './../../services/crudserv.service';
 import { Component, OnInit } from '@angular/core';
@@ -39,13 +40,14 @@ public role4='';
     score:0,
     dateCreation: Date.now(),
     classe:'detail',
-    url: ["https://firebasestorage.googleapis.com/v0/b/lfqnep.appspot.com/o/affiches%2Fdefaut%2Fdefaut.png?alt=media&token=2db2301d-db8c-4ab9-a562-7098c2735fae"]
+    url: "https://firebasestorage.googleapis.com/v0/b/lfqnep.appspot.com/o/affiches%2Fdefaut%2Fdefaut.png?alt=media&token=2db2301d-db8c-4ab9-a562-7098c2735fae"
   };
   // filmForm: FormGroup;
   constructor(
     // private fb : FormBuilder,
     private crud: CrudservService,
-    private msg: MessagerieService
+    private msg: MessagerieService,
+    private router : Router
   ) {
 
   }
@@ -81,6 +83,9 @@ public role4='';
      this.msg.envoiMail(mail2).subscribe(()=>{
        console.log('ok envoyé done');
        this.fini=true;
+       setTimeout(() => {
+         this.router.navigate([`/`]);
+       }, 5);
      });
   }
 

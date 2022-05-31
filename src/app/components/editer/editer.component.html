@@ -56,6 +56,8 @@
                     alt="crayon"></div>
             <div *ngIf="modifAffiche">
 
+
+                
                 <form #uploadForm="ngForm" (ngSubmit)="uploader()">
                     <!--important '=ngForm' !!! -->
                     <input type="file" name="fileUpload" id='fileUpload' (change)="choisirPhoto($event)" required><br>

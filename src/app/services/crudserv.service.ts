@@ -54,8 +54,9 @@ collek='films';
 }
 //-------------------------
 changerPhoto(id:any, url:any){
+ let urlimg= url;
   return this.afs.collection('films').doc(id).update({
-    url:[firebase.firestore.FieldValue.arrayUnion(url)]
+    url: firebase.firestore.FieldValue.arrayUnion(urlimg)
   });
 }
 }

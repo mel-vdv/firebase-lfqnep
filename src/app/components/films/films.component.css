@@ -11,7 +11,7 @@ flex-wrap: wrap;
 }
 .recherche{
     background-color: burlywood;
-    width: 25vw; height: 90vh;
+    width: 20vw; height: 90vh;
 }
 .haut{
     height: 35%;
@@ -20,29 +20,63 @@ flex-wrap: wrap;
     height: 65%;
 }
 .affichage{
+    background-image: url(./../../../assets/mur.png);
+    background-size: cover;
+    background-attachment:local;
+    background-repeat: repeat-y;
     overflow: scroll;
-    width: 75vw;
+
+    top:10vh;left:20vw;
+    width: 80vw;
     height: 90vh;
     display: flex;
    justify-content:flex-start;
-   align-items: flex-start;
+   align-items:flex-start;
     flex-wrap: wrap;
     background-color: beige;
 }
+
 .detail{
-    background-color: rgb(201, 167, 173);
-    height: 30vw;
-    width: 20vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    height: 29vw;
+    width: 19.5vw;
     font-size: 1vw;
 }
-.detail img {
-    max-width: 15vw;
-    max-height: 25vw;
+.titre{
+height: 3.5vw;
+width: 19vw;
+display: flex; align-items:center ; justify-content: center;
+font-family: 'craie';
+color: rgba(255,255,255);
+letter-spacing: 0.1vw;
+font-size: 3.5vw;
 }
+.encart{
+    width: 19.5vw;
+    height: 29vw;
+    position: relative;
+    top: -29vw;
+    z-index: 2;
+}
+img[alt='encart']{
+    width: 19.5vw;
+    height: 29vw;
+}
+.dessin{
+    height: 22vw;
+    width: 15vw;
+    z-index: 1;
+    margin: auto;
+}
+.score{
+   height: 3.5vw; 
+   width: 19vw;
+}
+img[alt='dessin']{
+    width: 15vw;
+   height: 22vw;
+   
+}
+
 .detail span {
     text-align: center;
     font-weight: bold;
@@ -54,7 +88,10 @@ img[alt='star']{
 .score{
     display: flex;
     align-items: center;
+    justify-content: center;
 }
-.select{
-    background-color: rgb(175, 155, 159);
-}
+@font-face {
+    font-family: "craie";
+    src: url(./../../../assets/ColoredCrayons-7wPR.ttf) format("truetype");
+  }
+

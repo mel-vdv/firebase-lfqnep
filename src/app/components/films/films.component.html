@@ -24,44 +24,69 @@
         </div>
         <div class="bas">
             <div *ngIf="critere==='genre'">
-            Sélectionnez un genre : <br><br>
-                <div> <input type="radio" id="drame" value="drame" name="choixGenre"(change)="choisirGenre('drame')">Drame</div>
-                <div> <input type="radio" id="thriller" value="thriller" name="choixGenre" (change)="choisirGenre('thriller')">Thriller</div>
-                <div> <input type="radio" id="romance" value="romance" name="choixGenre"(change)="choisirGenre('romance')">Romance</div>
-                <div> <input type="radio" id="historique" value="historique" name="choixGenre" (change)="choisirGenre('historique')">Historique</div>
-                <div> <input type="radio" id="fantastique" value="fantastique" name="choixGenre" (change)="choisirGenre('fantastique')">Fantastique</div>
-                <div> <input type="radio" id="comedie" value="comedie" name="choixGenre"(change)="choisirGenre('comedie')">Comédie</div>
-                <div> <input type="radio" id="policier" value="policier" name="choixGenre" (change)="choisirGenre('policier')">Policier</div>
-                <div> <input type="radio" id="action" value="action" name="choixGenre" (change)="choisirGenre('action')">Action</div>
-                <div> <input type="radio" id="horreur" value="horreur" name="choixGenre" (change)="choisirGenre('horreur')">Horreur</div>
-                <div> <input type="radio" id="dystopie" value="dystopie" name="choixGenre" (change)="choisirGenre('dystopie')">Dystopie</div>
-                <div> <input type="radio" id="western" value="western" name="choixGenre"(change)="choisirGenre('western')">Western</div>
-                <div> <input type="radio" id="peplum" value="peplum" name="choixGenre" (change)="choisirGenre('peplum')">Péplum</div>
-                <div> <input type="radio" id="sf" value="sf" name="choixGenre" (change)="choisirGenre('sf')">Science-Fiction</div>
+                Sélectionnez un genre : <br><br>
+                <div> <input type="radio" id="drame" value="drame" name="choixGenre"
+                        (change)="choisirGenre('drame')">Drame</div>
+                <div> <input type="radio" id="thriller" value="thriller" name="choixGenre"
+                        (change)="choisirGenre('thriller')">Thriller</div>
+                <div> <input type="radio" id="romance" value="romance" name="choixGenre"
+                        (change)="choisirGenre('romance')">Romance</div>
+                <div> <input type="radio" id="historique" value="historique" name="choixGenre"
+                        (change)="choisirGenre('historique')">Historique</div>
+                <div> <input type="radio" id="fantastique" value="fantastique" name="choixGenre"
+                        (change)="choisirGenre('fantastique')">Fantastique</div>
+                <div> <input type="radio" id="comedie" value="comedie" name="choixGenre"
+                        (change)="choisirGenre('comedie')">Comédie</div>
+                <div> <input type="radio" id="policier" value="policier" name="choixGenre"
+                        (change)="choisirGenre('policier')">Policier</div>
+                <div> <input type="radio" id="action" value="action" name="choixGenre"
+                        (change)="choisirGenre('action')">Action</div>
+                <div> <input type="radio" id="horreur" value="horreur" name="choixGenre"
+                        (change)="choisirGenre('horreur')">Horreur</div>
+                <div> <input type="radio" id="dystopie" value="dystopie" name="choixGenre"
+                        (change)="choisirGenre('dystopie')">Dystopie</div>
+                <div> <input type="radio" id="western" value="western" name="choixGenre"
+                        (change)="choisirGenre('western')">Western</div>
+                <div> <input type="radio" id="peplum" value="peplum" name="choixGenre"
+                        (change)="choisirGenre('peplum')">Péplum</div>
+                <div> <input type="radio" id="sf" value="sf" name="choixGenre"
+                        (change)="choisirGenre('sf')">Science-Fiction</div>
             </div>
             <div *ngIf="critere==='motcle'">
                 <span> Entrer un Mot clé : </span>
-                <input type="text" id="motcle" name="motcle" [(ngModel)]="motcle" >
+                <input type="text" id="motcle" name="motcle" [(ngModel)]="motcle">
                 <button (click)="rechMotcle()">rechercher</button>
             </div>
         </div>
     </div>
+
     <div class="affichage">
-        <div *ngFor="let affiche of films$; let i=index;">
-            <div class="{{affiche.classe}}" (mouseover)="foncer(i)" (mouseleave)="defoncer(i)" (click)="nav(affiche.id!)">
-                <span> {{affiche.titre| uppercase}}</span>
-                <img [src]="affiche.url" alt="dessin">
-                <div *ngIf="affiche.nbVotesPublic !==0" class="score">
-                    Vote public:
-                    <img  *ngIf="affiche.score===0" src="./../../../assets/star.png" alt='star'><img alt='star' *ngIf="affiche.score>0" src="./../../../assets/starjaune.png">
-                    <img  *ngIf="affiche.score<1" src="./../../../assets/star.png"alt='star'><img alt='star'  *ngIf="affiche.score>1" src="./../../../assets/starjaune.png">
-                    <img  *ngIf="affiche.score<2" src="./../../../assets/star.png"alt='star'><img alt='star' *ngIf="affiche.score>2" src="./../../../assets/starjaune.png">
-                    <img  *ngIf="affiche.score<3" src="./../../../assets/star.png"alt='star'><img alt='star' *ngIf="affiche.score>3" src="./../../../assets/starjaune.png">
-                    <img  *ngIf="affiche.score<4" src="./../../../assets/star.png"alt='star'><img alt='star' *ngIf="affiche.score>4" src="./../../../assets/starjaune.png">
-                    <img  *ngIf="affiche.score<5" src="./../../../assets/star.png"alt='star'><img alt='star' *ngIf="affiche.score>5" src="./../../../assets/starjaune.png">
+
+     
+        <div  *ngFor="let affiche of films$; let i=index;">
+            <div class="{{affiche.classe}}" (mouseover)="foncer(i)" (mouseleave)="defoncer(i)"
+                (click)="nav(affiche.id!)">
+                <div class="titre"><span> {{affiche.titre| uppercase}}</span></div> 
+                <div class="dessin"><img [src]="affiche.url" alt="dessin"></div> 
+                <div class="score"*ngIf="affiche.nbVotesPublic !==0">
+                    <img *ngIf="affiche.score===0" src="./../../../assets/star.png" alt='star'><img alt='star'
+                        *ngIf="affiche.score>0" src="./../../../assets/starjaune.png">
+                    <img *ngIf="affiche.score<1" src="./../../../assets/star.png" alt='star'><img alt='star'
+                        *ngIf="affiche.score>1" src="./../../../assets/starjaune.png">
+                    <img *ngIf="affiche.score<2" src="./../../../assets/star.png" alt='star'><img alt='star'
+                        *ngIf="affiche.score>2" src="./../../../assets/starjaune.png">
+                    <img *ngIf="affiche.score<3" src="./../../../assets/star.png" alt='star'><img alt='star'
+                        *ngIf="affiche.score>3" src="./../../../assets/starjaune.png">
+                    <img *ngIf="affiche.score<4" src="./../../../assets/star.png" alt='star'><img alt='star'
+                        *ngIf="affiche.score>4" src="./../../../assets/starjaune.png">
+                    <img *ngIf="affiche.score<5" src="./../../../assets/star.png" alt='star'><img alt='star'
+                        *ngIf="affiche.score>5" src="./../../../assets/starjaune.png">
                 </div>
+                <div class="encart"><img src="./../../../assets/cadres.png" alt="encart"></div>
+               
             </div>
         </div>
+
+
     </div>
 </div>
-

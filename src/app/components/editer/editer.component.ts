@@ -107,9 +107,12 @@ export class EditerComponent implements OnInit {
             this.modifAffiche=false;
           });
         })
-      ).subscribe();//indispensable pour récupérer un observable !!
+      ).subscribe(()=>{//subscribe = indispensable pour récupérer un observable !!
+         //ensuire, apres upload, on vide le formulaire:
+    
+      });
 
-    //ensuire, apres upload, on vide le formulaire:
+        console.log('ok 112done');
     this.photo = {
       titre: this.filmId, file: ''
     };
